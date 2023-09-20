@@ -49,19 +49,25 @@ input[type="submit"] {
 .app {
   padding: 30px;
 }
-.unchecked-task li {
+#unchecked-task {
+  border-bottom: 3px solid black;
+}
+#unchecked-task li {
   padding: 10px;
   list-style: none;
   display: flex;
 }
-.unchecked-task li p {
+#unchecked-task li p {
   padding-left: 5px;
+  color: black;
+  line-height: 40px;
+  text-align: center;
 }
-.checked-task li {
+#checked-task li {
   padding: 10px;
   list-style: none;
   display: flex;
 }
-.checked-task li p {
+#checked-task li p {
   padding-left: 5px;
 }
