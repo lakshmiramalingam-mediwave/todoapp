@@ -1,4 +1,4 @@
-allTasks = [
+totalTasks = [
   {
     id: "1",
     todaytask: "walking",
@@ -7,7 +7,7 @@ allTasks = [
 ];
 function updateUiList() {
   clearUl();
-  for (let task of allTasks) {
+  for (let task of totalTasks) {
     const event = MakeLiList(task);
     const ul = document.querySelector("#unchecked-task");
     ul.appendChild(event);
@@ -64,16 +64,16 @@ function MakeLiList(task) {
   }
 }
 function checkingCheckBox(taskId, bool) {
-  const checkIndex = allTasks.findIndex((task) => task.id == taskId);
+  const checkIndex = totalTasks.findIndex((task) => task.id == taskId);
   if (checkIndex != -1) {
-    allTasks[checkIndex]["ischecked"] = bool;
+    totalTasks[checkIndex]["ischecked"] = bool;
     sortArray();
     saveToLocalStorage();
     updateUiList();
   }
 }
 function sortArray() {
-  allTasks.sort((a, b) =>
+  totalTasks.sort((a, b) =>
     a.ischecked === b.ischecked ? 0 : a.ischecked ? 1 : -1
   );
 }
@@ -83,6 +83,10 @@ function addForm() {
     e.preventDefault();
     let taskInput = document.querySelector("#task").value;
     let button = document.querySelector("#button-todo");
+    if(taskInput=="")
+    {
+      alert("assign something")
+    }
     const task = {
       id: new Date().getTime(),
       work: taskInput,
@@ -93,7 +97,7 @@ function addForm() {
   });
 }
 function addtask(task) {
-  allTasks.push(task);
+  totalTasks.push(task);
   sortArray();
   saveToLocalStorage();
 }
@@ -101,15 +105,15 @@ function addtask(task) {
 //     const checkbox = document.querySelector("#id");
 // }
 function saveToLocalStorage() {
-  const str = JSON.stringify(allTasks);
+  const str = JSON.stringify(totalTasks);
   localStorage.setItem("my-event-list", str);
 }
 function getFromLocalStorage() {
   const str = localStorage.getItem("my-event-list");
   if (!str) {
-    return allTasks;
+    return totalTasks;
   } else {
-    allTasks = JSON.parse(str);
+    totalTasks = JSON.parse(str);
   }
 }
 getFromLocalStorage();
